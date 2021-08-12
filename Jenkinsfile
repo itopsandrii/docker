@@ -4,12 +4,19 @@ pipeline {
   }
   
   stages {
-     stage('Hello') {
+     stage('build') {
 	    steps {
-		       sh 'java -version'
-			   echo "Get working directory"
-			   sh 'pwd'
+		           echo 'genetating file 100MB'
+		           sh 'fallocate -l 100MB test.txt'
 		}	   
-	 }	
-  }
+	 }
+    stage('testing') {
+	    steps {
+	                  echo 'arcive file'
+		          sh 'gzip test.txt'
+		          echo 'file size'
+		          sh 'ls -lh'
+	    }
+     }
+  }	  
 }
